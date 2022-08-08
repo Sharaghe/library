@@ -1,0 +1,74 @@
+body{
+    font-size: 1em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.wrapper{
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+h1{
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+.add-area{
+    display: grid;
+    grid-template-columns: repeat(2, 2fr) repeat(2, 1fr) auto;
+    align-items: end;
+}
+
+.add-area{
+    margin-top: 40px;
+}
+
+.add-area > .grid-item{
+    padding-right: 20px;
+}
+
+.add-area input, .add-area select{
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.add-area label{
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: .85rem;
+}
+
+.add-area button{
+    padding: 10px 20px;
+    background: rgb(12, 159, 227);
+    border-radius: 5px;
+    border: 1px solid rgb(12, 159, 227);
+    color: white;
+    font-weight: 600;
+}
+
+.add-area button:hover{
+    cursor: pointer;
+    background: radial-gradient(ellipse at center top, rgb(58, 188, 248) 0%, rgb(12, 159, 227) 100%);
+    background-position: -100px 0;
+}
+
+table{
+    width: 100%;
+    margin-top: 50px;
+    padding: 0;
+    border-spacing: 0; 
+}
+
+table th, table td{
+    text-align: left;
+    padding: 20px 0;
+}
+
+table td{
+    border-top: 1px solid #CCC;
+}
