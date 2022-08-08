@@ -11,33 +11,34 @@
 <body>
     <div class="wrapper">
         <h1>My book Library</h1>
-        <div class="add-area">
+        <form action="#" id="addBookForm">
+            <div class="add-area">
+                <div class="grid-item">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required />
+                </div>
+                
+                <div class="grid-item">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author" required />
+                </div>
 
-            <div class="grid-item">
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title" />
-            </div>
-            
-            <div class="grid-item">
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author" />
-            </div>
+                <div class="grid-item">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages" required />
+                </div>
 
-            <div class="grid-item">
-                <label for="pages">Pages</label>
-                <input type="number" name="pages" id="pages" />
-            </div>
+                <div class="grid-item">
+                    <label for="haveRead">Read it?</label>
+                    <select name="haveRead" id="haveRead" required>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
 
-            <div class="grid-item">
-                <label for="haveRead">Read it?</label>
-                <select name="haveRead" id="haveRead">
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
+                <button type="submit">Add Book</button>
             </div>
-
-            <button type="submit">Add Book</button>
-        </div>
+        </form>
         <table>
             <thead>
                 <th>Title</th>

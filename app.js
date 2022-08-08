@@ -8,12 +8,28 @@ function Book(title, author, pages, haveRead){
     }
 }
 
+
+const addBook = (e) => {
+    e.preventDefault();
+
+    let title = document.querySelector("input#title").value;
+    let author = document.querySelector("input#author").value;
+    let pages = document.querySelector("input#pages").value;
+    let haveRead = document.querySelector("select#haveRead").value;
+
+    addBooktoLibrary(new Book(title, author, pages, haveRead));
+}
+
 const table = document.querySelector("table");
+const addBookForm = document.querySelector("#addBookForm");
+
+addBookForm.addEventListener("submit", addBook);
 
 let myLibrary = [];
 
 function addBooktoLibrary(book){
-    myLibrary.push(book)
+    myLibrary.push(book);
+    checkForUpdates();
 }
 
 function createNewRow(book){
@@ -40,12 +56,17 @@ function createNewRow(book){
 }
 
 function checkForUpdates(){
+    deleteAllRows();
     myLibrary.forEach(element => {
         createNewRow(element);
     });
 }
 
-const hobbit = new Book("The Hobbit", "J.R.R. Tolkien", 295, "no");
-addBooktoLibrary(hobbit);
+function deleteAllRows(){
+    let rows = document.querySelectorAll("table>tr");
+    Array.from(rows).forEach(element => {
+        console.log(element);
+        table.removeChild(element);
+    });
+}
 
-checkForUpdates();
