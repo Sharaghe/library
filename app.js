@@ -11,17 +11,19 @@ function Book(title, author, pages, haveRead){
 
 const addBook = (e) => {
     e.preventDefault();
-
-    let title = document.querySelector("input#title").value;
-    let author = document.querySelector("input#author").value;
-    let pages = document.querySelector("input#pages").value;
-    let haveRead = document.querySelector("select#haveRead").value;
-
-    addBooktoLibrary(new Book(title, author, pages, haveRead));
+    addBooktoLibrary(new Book(inputs.title.value, inputs.author.value, inputs.pages.value, inputs.haveRead.value));
+    clearInputs();
 }
 
 const table = document.querySelector("table");
 const addBookForm = document.querySelector("#addBookForm");
+const inputs = {
+    title: document.querySelector("input#title"),
+    author: document.querySelector("input#author"),
+    pages: document.querySelector("input#pages"),
+    haveRead: document.querySelector("select#haveRead")
+};
+
 
 addBookForm.addEventListener("submit", addBook);
 
@@ -32,8 +34,16 @@ function addBooktoLibrary(book){
     checkForUpdates();
 }
 
-function createNewRow(book){
+function clearInputs(){
+    Object.keys(inputs).forEach(element => {
+        inputs[element].value = "";
+        console.log(element);
+    });
+}
+
+function createNewRow(book, index){
     let row = document.createElement("tr");
+    row.setAttribute("data-id", index);
 
     let dataTitle = document.createElement("td");
     dataTitle.innerText = book.title;
@@ -47,18 +57,29 @@ function createNewRow(book){
     let dataHaveRead = document.createElement("td");
     dataHaveRead.innerText = book.haveRead;
 
+    let buttonHolder = document.createElement("td");
+
+    let deleteButton = document.createElement("button");
+    deleteButton.classList.add("deleteButton");
+    deleteButton.innerText = "Delete";
+
+    buttonHolder.appendChild(deleteButton);
+
     row.appendChild(dataTitle);
     row.appendChild(dataAuthor);
     row.appendChild(dataPages);
     row.appendChild(dataHaveRead);
+    row.appendChild(buttonHolder);
 
     table.appendChild(row);
 }
 
 function checkForUpdates(){
     deleteAllRows();
+    let index = 0;
     myLibrary.forEach(element => {
-        createNewRow(element);
+        createNewRow(element, index);
+        index++;
     });
 }
 

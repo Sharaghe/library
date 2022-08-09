@@ -42,7 +42,7 @@ h1{
     font-size: .85rem;
 }
 
-.add-area button{
+.add-area button, .deleteButton{
     padding: 10px 20px;
     background: rgb(12, 159, 227);
     border-radius: 5px;
@@ -54,7 +54,6 @@ h1{
 .add-area button:hover{
     cursor: pointer;
     background: radial-gradient(ellipse at center top, rgb(58, 188, 248) 0%, rgb(12, 159, 227) 100%);
-    background-position: -100px 0;
 }
 
 table{
@@ -71,4 +70,14 @@ table th, table td{
 
 table td{
     border-top: 1px solid #CCC;
+}
+
+.deleteButton{
+    background: rgb(208, 65, 65);
+    border: 1px solid rgb(208, 65, 65);
+}
+
+.deleteButton:hover{
+    cursor: pointer;
+    background: radial-gradient(ellipse at center top, rgb(237, 101, 101) 0%, rgb(208, 65, 65) 100%);
 }
