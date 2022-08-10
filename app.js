@@ -3,9 +3,10 @@ function Book(title, author, pages, haveRead){
     this.author = author;
     this.pages = pages;
     this.haveRead = haveRead;
-    this.info = function(){
-        return this.title + " by " + this.author + "(" + this.pages + " pages) - " + this.haveRead;
-    }
+}
+
+Book.prototype.info = function(){
+    return this.title + " by " + this.author + "(" + this.pages + " pages) - " + this.haveRead;
 }
 
 
@@ -37,7 +38,6 @@ function addBooktoLibrary(book){
 function clearInputs(){
     Object.keys(inputs).forEach(element => {
         inputs[element].value = "";
-        console.log(element);
     });
 }
 
@@ -45,33 +45,45 @@ function createNewRow(book, index){
     let row = document.createElement("tr");
     row.setAttribute("data-id", index);
 
-    let dataTitle = document.createElement("td");
-    dataTitle.innerText = book.title;
-
-    let dataAuthor = document.createElement("td");
-    dataAuthor.innerText = book.author;
-
-    let dataPages = document.createElement("td");
-    dataPages.innerText = book.pages;
-
-    let dataHaveRead = document.createElement("td");
-    dataHaveRead.innerText = book.haveRead;
-
     let buttonHolder = document.createElement("td");
-
     let deleteButton = document.createElement("button");
     deleteButton.classList.add("deleteButton");
     deleteButton.innerText = "Delete";
-
+    deleteButton.addEventListener("click", () => removeEntry(index));
+    buttonHolder.appendChild(createMarkReadButton(index, book.haveRead));
     buttonHolder.appendChild(deleteButton);
 
-    row.appendChild(dataTitle);
-    row.appendChild(dataAuthor);
-    row.appendChild(dataPages);
-    row.appendChild(dataHaveRead);
+    Object.keys(book).forEach(element => {
+        let td = document.createElement("td");
+        td.innerText = book[element];
+
+        row.appendChild(td);
+    });
+
     row.appendChild(buttonHolder);
 
     table.appendChild(row);
+}
+
+function createMarkReadButton(index, readStatus){
+    let markReadButton = document.createElement("button");
+    markReadButton.classList.add("markReadButton");
+    markReadButton.innerText = (readStatus === "yes") ? "Mark unread" : "Mark read";
+    markReadButton.addEventListener("click", () => toggleHaveRead(index));
+    return markReadButton;
+}
+
+function toggleHaveRead(index){
+
+    let currentStatus = myLibrary[index].haveRead;
+
+    myLibrary[index].haveRead = (currentStatus === "yes") ? "no" : "yes";
+    checkForUpdates();
+}
+
+function removeEntry(index){
+    myLibrary.splice(index, 1);
+    checkForUpdates();
 }
 
 function checkForUpdates(){
@@ -86,7 +98,6 @@ function checkForUpdates(){
 function deleteAllRows(){
     let rows = document.querySelectorAll("table>tr");
     Array.from(rows).forEach(element => {
-        console.log(element);
         table.removeChild(element);
     });
 }
