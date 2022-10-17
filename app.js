@@ -14,8 +14,33 @@ class Book{
 
 const addBook = (e) => {
     e.preventDefault();
-    addBooktoLibrary(new Book(inputs.title.value, inputs.author.value, inputs.pages.value, inputs.haveRead.value));
-    clearInputs();
+
+    for (let input in inputs){
+        console.log("Input: " + inputs[input].setCustomValidity(""));
+    }
+
+    if(inputs.title.value === ""){
+        inputs.title.setCustomValidity("Please enter the name");
+        inputs.title.reportValidity();
+    } 
+
+    if(inputs.author.value === ""){
+        inputs.author.setCustomValidity("Please enter an author");
+        inputs.author.reportValidity();
+    } 
+
+    if(inputs.pages.value === ""){
+        inputs.pages.setCustomValidity("Please enter the number of pages");
+        inputs.pages.reportValidity();
+    } 
+
+    let form = document.querySelector("form");
+
+    if(form.checkValidity()){
+        addBooktoLibrary(new Book(inputs.title.value, inputs.author.value, inputs.pages.value, inputs.haveRead.value));
+        clearInputs();
+    } 
+
 }
 
 const table = document.querySelector("table");
